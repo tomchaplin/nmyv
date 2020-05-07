@@ -6,7 +6,7 @@ On either event, the extension passes the video ID to a small Python host which 
 
 ## Installation
 
-* Make sure that you have a copy of `youtube-viewer`, `python`, `tumux` and `mpv` installed and on your path.
+* Make sure that you have a copy of `youtube-viewer`, `python`, `tmux` and `mpv` installed and on your path.
 * Install the `nativemessaging` API however you choose; the easiest method is `pip3 install nativemessaging`.
 * Navigate to wherever you would like to install the host; this folder must not be altered after installation.
 * Clone the project with
