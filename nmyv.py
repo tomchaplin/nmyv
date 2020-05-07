@@ -26,4 +26,4 @@ while True:
     if vidMatch:
         vid = vidMatch.string
         # Open the new video
-        os.system('tmux send-keys -t nmyv :v='+vid+' Enter')
+        os.system('tmux send-keys -t nmyv :v='+vid+' Space --append-arg="--x11-name=nmyv" Enter')
