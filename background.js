@@ -1,6 +1,7 @@
 'use strict';
 
-let appName = 'com.tom.nmyv'; 
+const appName = 'com.tom.nmyv'; 
+const pauseVideoCMD = 'document.getElementsByTagName("video")[0].pause()';
 
 function parseURL(url) {
     var parser = document.createElement('a'),
@@ -26,19 +27,41 @@ function parseURL(url) {
     };
 }
 
-const pauseVideoCMD = 'document.getElementsByTagName("video")[0].pause()';
+// Accepts a url, attempts to pull out the video ID and passes it onto the host
+// The host is responsible for check this is a good message before using it
+function nmyvOpen(url) {
+	let parsed = parseURL(url);
+	if(parsed.searchObject.v){
+		let vid = parsed.searchObject.v;
+		console.log(vid);
+		chrome.runtime.sendNativeMessage(appName, {text: vid})
+	}
+}
 
+// Injects a command into the current tab to pause the first HTML5 video it finds
+function pauseVideo(){
+	chrome.tabs.executeScript({code: pauseVideoCMD});
+}
+
+// Listener for clicking on extension icon
 chrome.browserAction.onClicked.addListener(function(tab) {
 	chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
-		let url = tabs[0].url;
-
-		let parsed = parseURL(url);
-		if(parsed.searchObject.v){
-			let vid = parsed.searchObject.v;
-			console.log(vid);
-			chrome.runtime.sendNativeMessage(appName, {text: vid})
-			chrome.tabs.executeScript({code: pauseVideoCMD});
-
-		}
+		pauseVideo();
+		nmyvOpen(tabs[0].url);
 	});
 });
+
+// Adding context menu item to open link with nmyv
+chrome.contextMenus.create({
+	id: 'nmyv_open',
+	title: "Open with nmyv",
+	contexts: ['link']
+});
+
+// On click event listener for the context menu item
+chrome.contextMenus.onClicked.addListener( function(info) {
+	if( info.menuItemId == 'nmyv_open' ) {
+		nmyvOpen(info.linkUrl);
+	}
+});
+

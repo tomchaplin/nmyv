@@ -2,7 +2,7 @@
 	"name": "nmyv",
 	"version": "0.1",
 	"description": "A quick extension for interacting with youtube-viewer",
-	"permissions": ["activeTab", "tabs", "nativeMessaging"],
+	"permissions": ["activeTab", "tabs", "nativeMessaging", "contextMenus"],
 	"background": {
 		"scripts": ["background.js"],
 		"persistent": false
