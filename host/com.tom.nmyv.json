@@ -1,9 +1,9 @@
 {
 	"name": "com.tom.nmyv",
 	"description": "Host for nmyv",
-	"path": "/home/tom/.scripts/nmyv/nmyv.py",
+	"path": "HOST_PATH",
 	"type": "stdio",
 	"allowed_origins": [
-		"chrome-extension://aianlcfpegdokdjopofjahkdkbhbbhmc/"
+		"chrome-extension://hebdkkjmnpjecoegogkcmpehkjfmipip/"
 	]
 }
