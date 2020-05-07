@@ -55,6 +55,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 chrome.contextMenus.create({
 	id: 'nmyv_open',
 	title: "Open with nmyv",
+	targetUrlPatterns: ["*://*.youtube.com/*"],
 	contexts: ['link']
 });
 

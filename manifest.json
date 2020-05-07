@@ -8,7 +8,12 @@
 		"persistent": false
 	},
 	"browser_action": {
-		"default_icon": "logo.png"
+		"default_icon": "nmyv_128.png"
+	},
+	"icons": {
+		"16": "nmyv_16.png",
+		"48": "nmyv_48.png",
+		"128": "nmyv_128.png"
 	},
 	"manifest_version": 2
 }
