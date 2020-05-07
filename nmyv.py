@@ -4,14 +4,6 @@ import os
 import re
 import time
 
-# We check if "nmyv" is open
-# If not then we open it up with a youtube-viewer
-# The main loop is as follows
-# 1. Wait for a message
-# 2. Close a potentially open video with "q<Backspace>"
-# 3. Open the video
-
-#print("nmyv host started")
 # Check for nmyv and open if needed
 stream = os.popen('tmux list-sessions | grep nmyv | wc -l')
 numStreams = stream.read()
