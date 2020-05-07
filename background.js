@@ -3,6 +3,7 @@
 const appName = 'com.tom.nmyv'; 
 const pauseVideoCMD = 'document.getElementsByTagName("video")[0].pause()';
 
+// From https://www.abeautifulsite.net/parsing-urls-in-javascript
 function parseURL(url) {
     var parser = document.createElement('a'),
         searchObject = {},
