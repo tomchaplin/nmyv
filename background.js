@@ -26,17 +26,19 @@ function parseURL(url) {
     };
 }
 
-chrome.runtime.onInstalled.addListener(function() {
-	chrome.browserAction.onClicked.addListener(function(tab) {
-		chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
-			let url = tabs[0].url;
+const pauseVideoCMD = 'document.getElementsByTagName("video")[0].pause()';
 
-			let parsed = parseURL(url);
-			if(parsed.searchObject.v){
-				let vid = parsed.searchObject.v;
-				console.log(vid);
-				chrome.runtime.sendNativeMessage(appName, {text: vid})
-			}
-		});
+chrome.browserAction.onClicked.addListener(function(tab) {
+	chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+		let url = tabs[0].url;
+
+		let parsed = parseURL(url);
+		if(parsed.searchObject.v){
+			let vid = parsed.searchObject.v;
+			console.log(vid);
+			chrome.runtime.sendNativeMessage(appName, {text: vid})
+			chrome.tabs.executeScript({code: pauseVideoCMD});
+
+		}
 	});
 });
