@@ -1,7 +1,6 @@
 'use strict';
 
 const appName = 'com.tom.nmyv'; 
-const pauseVideoCMD = 'document.getElementsByTagName("video")[0].pause()';
 
 // From https://www.abeautifulsite.net/parsing-urls-in-javascript
 function parseURL(url) {
@@ -30,25 +29,32 @@ function parseURL(url) {
 
 // Accepts a url, attempts to pull out the video ID and passes it onto the host
 // The host is responsible for check this is a good message before using it
-function nmyvOpen(url) {
+function nmyvOpen(url, timestamp) {
 	let parsed = parseURL(url);
 	if(parsed.searchObject.v){
 		let vid = parsed.searchObject.v;
-		console.log(vid);
-		chrome.runtime.sendNativeMessage(appName, {text: vid})
+		chrome.runtime.sendNativeMessage(appName, {text: vid, time: timestamp})
 	}
 }
 
 // Injects a command into the current tab to pause the first HTML5 video it finds
+const pauseVideoCMD = 'document.getElementsByTagName("video")[0].pause()';
 function pauseVideo(){
 	chrome.tabs.executeScript({code: pauseVideoCMD});
+}
+
+const getVideoTimeCMD = 'document.getElementsByTagName("video")[0].currentTime'
+function getVideoTime(callback){
+	chrome.tabs.executeScript({code: getVideoTimeCMD}, callback);
 }
 
 // Listener for clicking on extension icon
 chrome.browserAction.onClicked.addListener(function(tab) {
 	chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
 		pauseVideo();
-		nmyvOpen(tabs[0].url);
+		getVideoTime(function(results) {
+			nmyvOpen(tabs[0].url, results[0]);
+		});
 	});
 });
 
@@ -63,7 +69,7 @@ chrome.contextMenus.create({
 // On click event listener for the context menu item
 chrome.contextMenus.onClicked.addListener( function(info) {
 	if( info.menuItemId == 'nmyv_open' ) {
-		nmyvOpen(info.linkUrl);
+		nmyvOpen(info.linkUrl, 0);
 	}
 });
 

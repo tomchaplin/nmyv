@@ -33,6 +33,7 @@ for_window [instance="nmyv"] floating enable, resize set 640 210, move absolute 
 ## Usage
 
 When currently watching a YouTube video, click the `nmyv` logo next to the address bar or in the options menu to pause the video and pop-out a copy of the video.
+The video should start from where you left off.
 If you are browsing YouTube for videos to watch, right click on a link to a video and select the option "Open with nmyv" to pop-out a copy of the video.
 
 ## Limitations
@@ -40,5 +41,4 @@ If you are browsing YouTube for videos to watch, right click on a link to a vide
 * The project currently only works with Chromium, although a quick tweak of the install script would allow Google Chrome usage.
 Firefox support should be possible but might be more involved.
 * Currently this is only written for Linux, although should in principle be possible for Windows and MacOS.
-* When watching a YouTube video, it would be nice if the pop-out resumed the video where you left off.
 * More configuration options available through `youtube-viewer` could be exposed through a simple config file or through an interface in Chromium.
