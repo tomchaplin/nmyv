@@ -21,7 +21,7 @@ while True:
     message = nativemessaging.get_message()
     # Close any currently running videos and close youtube-viewer
     os.system('tmux send-keys -t nmyv q Bspace :q Enter')
-    sleep(0.2)
+    time.sleep(0.2)
     # Check that we only got a valid youtube ID
     vidMatch = vidRegex.match(message["text"]);
     if vidMatch:
