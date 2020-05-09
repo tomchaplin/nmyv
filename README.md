@@ -42,3 +42,4 @@ If you are browsing YouTube for videos to watch, right click on a link to a vide
 Firefox support should be possible but might be more involved.
 * Currently this is only written for Linux, although should in principle be possible for Windows and MacOS.
 * More configuration options available through `youtube-viewer` could be exposed through a simple config file or through an interface in Chromium.
+* It would be nice if pressing the button again would resume the video in browser, picking up where you left off.
